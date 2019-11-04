@@ -19,18 +19,19 @@ public class Card{
   public Card(String suit, String rank){
     setRanks();
     HashMap<String,String> cardSuits = this.getCardSuits();
+
+    String extraSpace = rank.length()==1? " ":"";
     String card =
     "┌─────────┐\n"+
-    "│{}       │\n"+
+    "│"+ rank + extraSpace + "       │\n"+
     "│         │\n"+
     "│         │\n"+
     "│    "+ cardSuits.get(suit)+"    │\n"+
     "│         │\n"+
     "│         │\n"+
-    "│       {}|\n"+
-    "└─────────┘\n";
+    "│       "+ rank + extraSpace +"│\n"+
+    "└─────────┘";
     System.out.println(card);
-
   }
 
   public static void main (String[] arg){
