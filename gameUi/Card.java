@@ -8,34 +8,34 @@ public class Card{
   private static HashMap<String, String> cardSuits = new HashMap<String, String>();
 
   public void setRanks(){
-    this.cardSuits.put("Spades","♠");
-    this.cardSuits.put("Diamond","♦");
-    this.cardSuits.put("Hearts","♥");
-    this.cardSuits.put("Clover","♣");
+    this.cardSuits.put("S","♠");
+    this.cardSuits.put("D","♦");
+    this.cardSuits.put("H","♥");
+    this.cardSuits.put("C","♣");
   }
   public HashMap<String,String> getCardSuits(){
     return this.cardSuits;
   }
-  public Card(String suit, String rank){
+  public Card(String cardString){
     setRanks();
     HashMap<String,String> cardSuits = this.getCardSuits();
-
-    String extraSpace = rank.length()==1? " ":"";
+    //rank = rank.equals("T")? "10":rank;
+    //String "" = rank.length()==1? " ":"";
     String card =
-    "┌─────────┐\n"+
-    "│"+ rank + extraSpace + "       │\n"+
-    "│         │\n"+
-    "│         │\n"+
-    "│    "+ cardSuits.get(suit)+"    │\n"+
-    "│         │\n"+
-    "│         │\n"+
-    "│       "+ rank + extraSpace +"│\n"+
-    "└─────────┘";
+            "┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
+                    "│"+ cardString.charAt(0) + " " + "       │ │"+ cardString.charAt(2) + " " + "       │ │"+ cardString.charAt(4) + " " + "       │ │"+ cardString.charAt(6) + " " + "       │\n"+
+                    "│         │ │         │ │         │ │         │\n"+
+                    "│         │ │         │ │         │ │         │\n"+
+                    "│    "+ cardSuits.get(Character.toString(cardString.charAt(1)))+"    │ │    "+ cardSuits.get(Character.toString(cardString.charAt(3)))+"    │ │    "+cardSuits.get(Character.toString(cardString.charAt(5)))+"    │ │    "+cardSuits.get(Character.toString(cardString.charAt(7)))+"    │\n"+
+                    "│         │ │         │ │         │ │         │\n"+
+                    "│         │ │         │ │         │ │         │\n"+
+                    "│       "+ cardString.charAt(0) + " " +"│ │       "+ cardString.charAt(2) + " " +"│ │       "+ cardString.charAt(4) + " " +"│ │       "+ cardString.charAt(6) + " " +"│ \n"+
+                    "└─────────┘ └─────────┘ └─────────┘ └─────────┘";
     System.out.println(card);
   }
 
+
   public static void main (String[] arg){
-    Card testCard = new Card("Hearts","10");
-    Card testCard2 = new Card("Spades","10");
+    Card testCard = new Card("9H9D2S2C");
   }
 }
