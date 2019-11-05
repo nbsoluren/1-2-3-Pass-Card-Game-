@@ -19,7 +19,7 @@ public class EchoClient{
 
     PrintWriter out = new PrintWriter(client.getOutputStream(), true); //true autoflush data, immediately send import junit.framework.TestCase;
     out.println("received");
-    Thread.sleep(10000);
+//    Thread.sleep(10000);
 
     BufferedReader in  = new BufferedReader(new InputStreamReader(client.getInputStream()));
     String cardString = in.readLine();

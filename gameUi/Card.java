@@ -36,6 +36,6 @@ public class Card{
 
 
   public static void main (String[] arg){
-    Card testCard = new Card("9H9D2S2C");
+    Card testCard = new Card("TH9D2S2C");
   }
 }
