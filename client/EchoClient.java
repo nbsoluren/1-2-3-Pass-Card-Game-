@@ -12,34 +12,44 @@ public class EchoClient {
         try {
             String serverName = "localhost";
             int port = 8818;
+          Socket server = new Socket(serverName, port);
+            InputStream inputStream = server.getInputStream();
+            OutputStream outputStream = server.getOutputStream();
 
             System.out.println("Client started");
 //    Socket soc = new Socket("localhost", 8818);
             System.out.println("Connecting to " + serverName + " on port " + port);
-            Socket client = new Socket(serverName, port);
-            /* Send data to the ServerSocket */
-            System.out.println("Just connected to " + client.getRemoteSocketAddress());
 
-            PrintWriter out = new PrintWriter(client.getOutputStream(), true); //true autoflush data, immediately send import junit.framework.TestCase;
-            out.println("received");
+            /* Send data to the ServerSocket */
+            System.out.println("Just connected to " + server.getRemoteSocketAddress());
+
+            PrintWriter out = new PrintWriter(outputStream, true); //true autoflush data, immediately send import junit.framework.TestCase;
 //    Thread.sleep(10000);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             String cardString = in.readLine();
-            System.out.println("Cards from server:" + cardString + ". Enter card to pass.");
-            new Card(cardString);
+            System.out.println("Cards from server:" + cardString + "\n");
+            new Card(cardString+"");
+
+            //for reading from server
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            //for reading from terminal
+             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+          outputStream.write("what\n".getBytes());
+            while ((line = reader.readLine())!= null) {
+
+                if(line.equals("03")){
+                  System.out.println("Enter a card: \n");
+                  String str = userInput.readLine() + "\n";
+                  outputStream.write(str.getBytes());
+                  System.out.println(in.readLine());
+                }else{
+                  out.println("START\n");
+                  System.out.println(line);
+                }
 
 
-            while (true) {
-
-                BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-                System.out.println("Enter a string");
-                String str = userInput.readLine();
-
-                //sending to the server
-                out.println("received");
-
-                System.out.println(in.readLine());
 
 
             }

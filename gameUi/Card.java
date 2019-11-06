@@ -6,6 +6,27 @@ import java.util.*;
 public class Card{
   private static String[] cardRanks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
   private static HashMap<String, String> cardSuits = new HashMap<String, String>();
+  private static List<String> hand = new ArrayList<String> ();
+  private String cardString;
+
+  public HashMap<String,String> getCardSuits(){
+    return this.cardSuits;
+  }
+
+  public void setCardString(String cardString) {
+    this.cardString = cardString;
+  }
+
+  public void setHand(List<String> hand) {
+    Card.hand = hand;
+    //initial cards
+    StringBuilder sb = new StringBuilder();
+    for (String s : hand)
+    {
+      sb.append(s);
+    }
+    setCardString(sb.toString());
+  }
 
   public void setRanks(){
     this.cardSuits.put("S","♠");
@@ -13,14 +34,7 @@ public class Card{
     this.cardSuits.put("H","♥");
     this.cardSuits.put("C","♣");
   }
-  public HashMap<String,String> getCardSuits(){
-    return this.cardSuits;
-  }
-  public Card(String cardString){
-    setRanks();
-    HashMap<String,String> cardSuits = this.getCardSuits();
-    //rank = rank.equals("T")? "10":rank;
-    //String "" = rank.length()==1? " ":"";
+  public String makeCard(String cardString){
     String card =
             "┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
                     "│"+ cardString.charAt(0) + " " + "       │ │"+ cardString.charAt(2) + " " + "       │ │"+ cardString.charAt(4) + " " + "       │ │"+ cardString.charAt(6) + " " + "       │\n"+
@@ -31,11 +45,49 @@ public class Card{
                     "│         │ │         │ │         │ │         │\n"+
                     "│       "+ cardString.charAt(0) + " " +"│ │       "+ cardString.charAt(2) + " " +"│ │       "+ cardString.charAt(4) + " " +"│ │       "+ cardString.charAt(6) + " " +"│ \n"+
                     "└─────────┘ └─────────┘ └─────────┘ └─────────┘";
+    return card;
+  }
+
+  //for server
+  public void displayCards(){
+    cardString = this.cardString;
+    String card = makeCard(cardString);
     System.out.println(card);
+  }
+  //for client
+  public void displayCards(String cardString){
+    cardString = cardString+"";
+    String card = makeCard(cardString);
+    System.out.println(card);
+  }
+  //for server
+  public Card(List<String> cards){
+    setRanks();
+    HashMap<String,String> cardSuits = this.getCardSuits();
+    setHand(cards);
+    //rank = rank.equals("T")? "10":rank;
+    //String "" = rank.length()==1? " ":"";
+
+  }
+  //this one is for client. he just knows what's in his hands eh.
+  public Card(String card){
+    setRanks();
+    HashMap<String,String> cardSuits = this.getCardSuits();
+    displayCards(card);
+
   }
 
 
   public static void main (String[] arg){
-    Card testCard = new Card("TH9D2S2C");
+    //server
+//    List<String> cards =  new ArrayList<String> ();
+//    cards.add("TH");
+//    cards.add("TH");
+//    cards.add("TH");
+//    cards.add("TH");
+//      Card testCard = new Card(cards);
+//      testCard.displayCards();
+    //client
+    Card testCard = new Card("9H8HTHTH");
   }
 }
