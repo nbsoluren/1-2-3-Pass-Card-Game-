@@ -106,13 +106,13 @@ public class Card{
 
   public static void main (String[] arg){
     //server
-//    List<String> cards =  new ArrayList<String> ();
-//    cards.add("TH");
-//    cards.add("TH");
-//    cards.add("TH");
-//    cards.add("TH");
-//      Card testCard = new Card(cards);
-//      testCard.displayCards();
+		//List<String> cards =  new ArrayList<String> ();
+		//cards.add("TH");
+		//cards.add("TH");
+		//cards.add("TH");
+		//cards.add("TH");
+		//Card testCard = new Card(cards);
+		//testCard.displayCards();
     //client
     Card testCard = new Card("9H8HTHTH");
   }
