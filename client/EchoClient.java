@@ -37,7 +37,7 @@ public class EchoClient {
             //for reading from server
             String line;
             //for reading from terminal
-            outputStream.write("what\n".getBytes());
+//            outputStream.write("what\n".getBytes());
             while ((line = reader.readLine()) != null) {
                 if (line.equals("03")) {
                     String newCards = new String(reader.readLine());

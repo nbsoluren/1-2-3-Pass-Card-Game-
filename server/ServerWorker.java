@@ -55,12 +55,12 @@ public class ServerWorker extends Thread {
         String line;
         // while((line = reader.readLine()) != null){
         while (true) {
-            line = reader.readLine();
-            if ("quit".equalsIgnoreCase(line)) {
-                String msg = "Sad to see you go! :( Bye!\n";
-                outputStream.write(msg.getBytes());
-                break;
-            }
+//            line = reader.readLine();
+//            if ("quit".equalsIgnoreCase(line)) {
+//                String msg = "Sad to see you go! :( Bye!\n";
+//                outputStream.write(msg.getBytes());
+//                break;
+//            }
 
             while ((numberOfPlayers - 1) != numberOfUsers && state == 2) {
                 Thread.sleep(100);
@@ -114,7 +114,7 @@ public class ServerWorker extends Thread {
         //   outputStream.write(("Time now is" + new Date() + "\n").getBytes());
         //   Thread.sleep(1000);
         // }
-        clientSocket.close();
+//        clientSocket.close();
     }
 
 }
