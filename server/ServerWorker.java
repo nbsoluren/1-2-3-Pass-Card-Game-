@@ -65,9 +65,14 @@ public class ServerWorker extends Thread {
             while ((numberOfPlayers - 1) != numberOfUsers && state == 2) {
                 Thread.sleep(100);
             }
+
+            while(true){
             String signal = "03\n";
             outputStream.write(signal.getBytes());
-            System.out.println("Pass your cards!");
+            String playerHand = new String(hands.get(ID).cardString);
+            playerHand = playerHand + "\n";
+            outputStream.write(playerHand.getBytes());
+            System.out.println("Pass your cards!" + Integer.toString(ID+1));
             String passed = reader.readLine().substring(2, 4);
             System.out.println("Player " + (ID + 1) + " just passed " + passed);
             passedList.set(ID, passed);
@@ -94,17 +99,14 @@ public class ServerWorker extends Thread {
                     System.out.println(nextpassedValue);
                     System.out.println(cardString);
                     hand.displayCards();
-
-
-
-
-
                 }
-
+              submitted = 0;
             }
             while(submitted!=0){
                 Thread.sleep(100);
             }
+          }
+
 
 
         }

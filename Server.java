@@ -9,21 +9,17 @@ import java.util.*;
 import java.net.*;
 
 // Server class
-public class Server
-{
-    public static void main(String[] args) throws IOException
-    {
+public class Server {
+    public static void main(String[] args) throws IOException {
         // server is listening on port 5056
         ServerSocket ss = new ServerSocket(5056);
 
         // running infinite loop for getting
         // client request
-        while (true)
-        {
+        while (true) {
             Socket s = null;
 
-            try
-            {
+            try {
                 // socket object to receive incoming client requests
                 s = ss.accept();
 
@@ -41,8 +37,7 @@ public class Server
                 // Invoking the start() method
                 t.start();
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 s.close();
                 e.printStackTrace();
             }
@@ -51,8 +46,7 @@ public class Server
 }
 
 // ClientHandler class
-class ClientHandler extends Thread
-{
+class ClientHandler extends Thread {
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
     DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
     final DataInputStream dis;
@@ -61,31 +55,27 @@ class ClientHandler extends Thread
 
 
     // Constructor
-    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
-    {
+    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos) {
         this.s = s;
         this.dis = dis;
         this.dos = dos;
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         String received;
         String toreturn;
-        while (true)
-        {
+        while (true) {
             try {
 
                 // Ask user what he wants
-                dos.writeUTF("What do you want?[Date | Time]..\n"+
-                            "Type Exit to terminate connection.");
+                dos.writeUTF("What do you want?[Date | Time]..\n" +
+                        "Type Exit to terminate connection.");
 
                 // receive the answer from client
                 received = dis.readUTF();
 
-                if(received.equals("Exit"))
-                {
+                if (received.equals("Exit")) {
                     System.out.println("Client " + this.s + " sends exit...");
                     System.out.println("Closing this connection.");
                     this.s.close();
@@ -100,12 +90,12 @@ class ClientHandler extends Thread
                 // answer from the client
                 switch (received) {
 
-                    case "Date" :
+                    case "Date":
                         toreturn = fordate.format(date);
                         dos.writeUTF(toreturn);
                         break;
 
-                    case "Time" :
+                    case "Time":
                         toreturn = fortime.format(date);
                         dos.writeUTF(toreturn);
                         break;
@@ -119,13 +109,12 @@ class ClientHandler extends Thread
             }
         }
 
-        try
-        {
+        try {
             // closing resources
             this.dis.close();
             this.dos.close();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
