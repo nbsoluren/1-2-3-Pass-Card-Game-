@@ -42,6 +42,7 @@ public class EchoClient {
                 if(line.equals("03")){
                   System.out.println("Enter a card: \n");
                   String str = userInput.readLine() + "\n";
+                  str = "04"+str;
                   outputStream.write(str.getBytes());
                   System.out.println(in.readLine());
                 }else{

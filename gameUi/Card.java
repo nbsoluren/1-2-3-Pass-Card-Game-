@@ -7,13 +7,13 @@ public class Card{
   private static String[] cardRanks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
   private static HashMap<String, String> cardSuits = new HashMap<String, String>();
   private static List<String> hand = new ArrayList<String> ();
-  private String cardString;
+  public char[] cardString;
 
   public HashMap<String,String> getCardSuits(){
     return this.cardSuits;
   }
 
-  public void setCardString(String cardString) {
+  public void setCardString(char[] cardString) {
     this.cardString = cardString;
   }
 
@@ -25,7 +25,7 @@ public class Card{
     {
       sb.append(s);
     }
-    setCardString(sb.toString());
+    setCardString(sb.toString().toCharArray());
   }
 
   public void setRanks(){
@@ -51,7 +51,7 @@ public class Card{
   //for server
   public void displayCards(){
     cardString = this.cardString;
-    String card = makeCard(cardString);
+    String card = makeCard(new String(cardString));
     System.out.println(card);
   }
   //for client

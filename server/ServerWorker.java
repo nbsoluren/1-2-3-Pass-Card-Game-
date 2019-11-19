@@ -1,5 +1,7 @@
 package server;
 
+import gameUi.Card;
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -11,13 +13,19 @@ public class ServerWorker extends Thread {
     private final int ID;
     private static Integer numberOfPlayers;
     private static Integer numberOfUsers;
+    private static Integer state;
+    private static List<Card> hands = new ArrayList<Card>();
+    private static List<String> passedList = new ArrayList<String>(List.of("Hello", "world", "JAVA EVIL"));
+    private static Integer submitted = 0;
 
-    public ServerWorker(Socket clientSocket, List<String> initialHand1, int ID, Integer numberOfPlayers1, Integer numberOfUsers1) {
+    public ServerWorker(Socket clientSocket, List<String> initialHand1, int ID, Integer numberOfPlayers1, Integer numberOfUsers1, Integer state1, List<Card> hands1) {
         numberOfPlayers = numberOfPlayers1;
         this.clientSocket = clientSocket;
         this.initialHand = initialHand1;
         this.numberOfUsers = numberOfUsers1;
+        this.hands = hands1;
         this.ID = ID;
+        this.state = state1;
     }
 
     @Override
@@ -53,18 +61,51 @@ public class ServerWorker extends Thread {
                 outputStream.write(msg.getBytes());
                 break;
             }
-            System.out.println("number of players" + numberOfPlayers + "number of users" + numberOfUsers);
-            while ((numberOfPlayers - 1) != numberOfUsers) {
+
+            while ((numberOfPlayers - 1) != numberOfUsers && state == 2) {
                 Thread.sleep(100);
             }
-
             String signal = "03\n";
             outputStream.write(signal.getBytes());
             System.out.println("Pass your cards!");
-            String passed = reader.readLine();
+            String passed = reader.readLine().substring(2, 4);
             System.out.println("Player " + (ID + 1) + " just passed " + passed);
+            passedList.set(ID, passed);
             String msg = "You, player #" + (ID + 1) + " sent me " + passed + "\n";
             outputStream.write(msg.getBytes());
+
+            submitted++;
+            if(submitted == numberOfPlayers){
+                System.out.println("ALL PLAYERS PASSED");
+                for (int i=0; i<numberOfPlayers; i++){
+                    Card hand = hands.get(i);
+                    String passedValue = passedList.get(i);
+
+                    char[] cardString = hand.cardString;
+                    String handString = new String(cardString);
+                    System.out.println(handString);
+                    int index = handString.indexOf(passedValue);
+
+                    System.out.println(cardString[index] + "" + cardString[index+1]);
+                    int nextPlayerIndex = (i+1) % numberOfPlayers;
+                    String nextpassedValue = passedList.get(nextPlayerIndex);
+                    cardString[index] = nextpassedValue.charAt(0);
+                    cardString[index+1] = nextpassedValue.charAt(1);
+                    System.out.println(nextpassedValue);
+                    System.out.println(cardString);
+                    hand.displayCards();
+
+
+
+
+
+                }
+
+            }
+            while(submitted!=0){
+                Thread.sleep(100);
+            }
+
 
         }
         // for(int i=0; i<10; i++){
