@@ -18,6 +18,10 @@ public class Card{
     return this.cardRank;
   }
 
+  public char[] getCardString() {
+    return cardString;
+  }
+
   public void setCardString(char[] cardString) {
     this.cardString = cardString;
   }
