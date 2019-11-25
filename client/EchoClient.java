@@ -31,8 +31,22 @@ public class EchoClient {
 //    Thread.sleep(10000);
 
             String cardString = reader.readLine();
-            System.out.println("Cards from server:" + cardString + "\n");
+            System.out.println("Hello player! The server will not distribute your initial pool of cards");
+            System.out.println("Initial Pool of Cards from server:" + cardString + "\n");
             //new Card(cardString+"");
+
+            System.out.println("The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)");
+            
+            System.out.println("-----Client Side Gameplay Tutorial-----");
+            System.out.println("Once all the players have joined the game, the server side will direct the client side players to pass their cards.");
+            System.out.println("The players will be asked to enter a card. The players should only choose from their list of cards.");
+            System.out.println("To choose a card the player should input the card's number followed by its suit.");
+            System.out.println("After choosing a card, the player is notified of the card that it passed");
+            System.out.println("After all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right.");
+            System.out.println("The player wins once he gets the four matching cards.");
+            System.out.println();
+            System.out.println("-----GAMEPLAY-----");
+            System.out.println();
 
             //for reading from server
             String line;
@@ -43,7 +57,8 @@ public class EchoClient {
                     String newCards = new String(reader.readLine());
                     System.out.println(newCards);
                     new Card(newCards + "");
-                    System.out.println("Enter a card: \n");
+                    System.out.println("Player should choose a card to pass from the player's current pool of cards. To choose a card enter the card's number followed by its suit.");
+                    System.out.println("Choose a card. Enter the card's number followed by its suit: \n");
                     String str = userInput.readLine() + "\n";
                     str = "04" + str;
                     outputStream.write(str.getBytes());
