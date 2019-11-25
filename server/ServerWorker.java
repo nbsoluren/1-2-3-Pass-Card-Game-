@@ -40,7 +40,6 @@ public class ServerWorker extends Thread {
     private boolean cardChecker(String card, int id) {
         boolean suit = false;
         boolean rank = false;
-
         String cardString = new String(hands.get(id).getCardString());
         card = card.toUpperCase();
 
@@ -52,7 +51,7 @@ public class ServerWorker extends Thread {
                 return true;
             }
         }
-        System.out.println("No match found.");        
+        System.out.println("No match found.");
         return false;
     }
 
@@ -110,7 +109,7 @@ public class ServerWorker extends Thread {
             }
 
             passedList.set(ID, passed);
-            
+
             String msg = "You, player #" + (ID + 1) + " sent me " + passed + "\n";
             outputStream.write(msg.getBytes());
 
