@@ -17,6 +17,10 @@ public class Card{
     this.cardString = cardString;
   }
 
+  public char[] getCardString() {
+    return cardString;
+  }
+
   public void setHand(List<String> hand) {
     Card.hand = hand;
     //initial cards

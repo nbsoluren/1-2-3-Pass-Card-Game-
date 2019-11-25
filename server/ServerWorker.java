@@ -37,6 +37,30 @@ public class ServerWorker extends Thread {
         }
     }
 
+    private boolean cardChecker(String card, int id) {
+        boolean suit = false;
+        boolean rank = false;
+        char[] cardString = hands.get(id).getCardString();
+        // System.out.println("card: " + card);
+        // System.out.println("cardString: " + new String(cardString));
+
+        for(int i=0; i<8; i+=2) {
+            // System.out.println("card[0]: " + card.charAt(0));
+            // System.out.println("card[1]: " + card.charAt(1));
+            // System.out.println("cardString["+i+"]: " + cardString[i]);
+            // int j = i+1;
+            // System.out.println("cardString["+j+"]: " + cardString[i+1]);
+            if(card.charAt(0) == cardString[i]) rank = true;
+            if(card.charAt(1) == cardString[i+1]) suit = true;
+            if(rank && suit) {
+                System.out.println("Match found!");
+                return true;
+            }
+        }
+        System.out.println("No match found.");
+        return false;
+    }
+
     private void handleClientSocket() throws IOException, InterruptedException {
         InputStream inputStream = clientSocket.getInputStream();
         OutputStream outputStream = clientSocket.getOutputStream();
@@ -73,9 +97,25 @@ public class ServerWorker extends Thread {
             playerHand = playerHand + "\n";
             outputStream.write(playerHand.getBytes());
             System.out.println("Pass your cards!" + Integer.toString(ID+1));
+
             String passed = reader.readLine().substring(2, 4);
             System.out.println("Player " + (ID + 1) + " just passed " + passed);
+            boolean checker = cardChecker(passed,ID);
+            while(checker != true) {
+                String warning = "You, player #" + (ID + 1) + " don't have " + passed + "\n";
+                outputStream.write(warning.getBytes());
+
+                outputStream.write(signal.getBytes());
+                outputStream.write(playerHand.getBytes());
+                System.out.println("Pass your cards!" + Integer.toString(ID+1));
+
+                passed = reader.readLine().substring(2, 4);
+                System.out.println("Player " + (ID + 1) + " just passed " + passed);
+                checker = cardChecker(passed,ID);
+            }
+
             passedList.set(ID, passed);
+
             String msg = "You, player #" + (ID + 1) + " sent me " + passed + "\n";
             outputStream.write(msg.getBytes());
 
