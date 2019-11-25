@@ -126,9 +126,6 @@ public class ServerWorker extends Thread {
                     System.out.println(handString);
                     int index = handString.indexOf(passedValue);
 
-                    // System.out.println("passedValue: " + passedValue);
-                    // System.out.println("handString: " + handString);
-                    // System.out.println("index: " + index + "    player#: " + i);
                     System.out.println(cardString[index] + "" + cardString[index+1]);
                     int nextPlayerIndex = (i+1) % numberOfPlayers;
                     String nextpassedValue = passedList.get(nextPlayerIndex);
