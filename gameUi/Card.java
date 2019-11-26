@@ -61,8 +61,8 @@ public class Card{
   }
 
   public String makeCard(String cardString){
-	int s7 = 7;
-	int s8 = 8;
+	int spaces = 8;
+
     String card =
             "┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
                     "│"+ cardRank.get(Character.toString(cardString.charAt(0))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(2))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(4))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(6))) + " " + "       │\n"+
@@ -75,7 +75,7 @@ public class Card{
                     "└─────────┘ └─────────┘ └─────────┘ └─────────┘";
 	String cards =
 		"┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
-		"|"+ cardRank.get(Character.toString(cardString.charAt(4))) + String.format("%1$"+s7+"s","") + "| |";
+		"|"+ cardRank.get(Character.toString(cardString.charAt(4))) + String.format("%1$"+spaces+"s","") + "| |";
 		
 	return card;
   }
