@@ -73,7 +73,9 @@ public class EchoClient {
                   outputStream.write(signal2.getBytes());
                   System.out.println(reader.readLine());
                   //server.close();
-                } else {
+                } else if(line.equals("08")){
+                  System.out.println("YoUr A lOzEEEEErrrrr!oUr");
+                }else {
                     out.println("START\n");
                     System.out.println(line);
                 }

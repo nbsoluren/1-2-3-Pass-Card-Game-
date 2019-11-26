@@ -115,7 +115,12 @@ public class ServerWorker extends Thread {
                 outputStream.write(loser.getBytes());
               }
               break;
-            }else{
+            } else if(!(winners.isEmpty())){
+              signal = "08\n";
+              outputStream.write(signal.getBytes());
+              break;
+            }
+            else{
               signal = "03\n";
             }
             outputStream.write(signal.getBytes());
