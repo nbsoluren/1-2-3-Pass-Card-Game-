@@ -25,7 +25,7 @@ public class Card{
   public void setCardString(char[] cardString) {
     this.cardString = cardString;
   }
-
+  
   public void setHand(List<String> hand) {
     Card.hand = hand;
     //initial cards
@@ -61,17 +61,23 @@ public class Card{
   }
 
   public String makeCard(String cardString){
+	int s7 = 7;
+	int s8 = 8;
     String card =
             "┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
-                    "│"+ cardString.charAt(0) + " " + "       │ │"+ cardString.charAt(2) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(4))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(6))) + " " + "       │\n"+
+                    "│"+ cardRank.get(Character.toString(cardString.charAt(0))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(2))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(4))) + " " + "       │ │"+ cardRank.get(Character.toString(cardString.charAt(6))) + " " + "       │\n"+
                     "│         │ │         │ │         │ │         │\n"+
                     "│         │ │         │ │         │ │         │\n"+
                     "│    "+ cardSuits.get(Character.toString(cardString.charAt(1)))+"    │ │    "+ cardSuits.get(Character.toString(cardString.charAt(3)))+"    │ │    "+cardSuits.get(Character.toString(cardString.charAt(5)))+"    │ │    "+cardSuits.get(Character.toString(cardString.charAt(7)))+"    │\n"+
                     "│         │ │         │ │         │ │         │\n"+
                     "│         │ │         │ │         │ │         │\n"+
-                    "│       "+ cardString.charAt(0) + " " +"│ │       "+ cardString.charAt(2) + " " +"│ │       "+ cardString.charAt(4) + " " +"│ │       "+ cardString.charAt(6) + " " +"│ \n"+
+                    "│       "+ cardRank.get(Character.toString(cardString.charAt(0))) + " " +"│ │       "+ cardRank.get(Character.toString(cardString.charAt(2))) + " " +"│ │       "+ cardRank.get(Character.toString(cardString.charAt(4))) + " " +"│ │       "+ cardRank.get(Character.toString(cardString.charAt(4))) + " " +"│ \n"+
                     "└─────────┘ └─────────┘ └─────────┘ └─────────┘";
-    return card;
+	String cards =
+		"┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐\n"+
+		"|"+ cardRank.get(Character.toString(cardString.charAt(4))) + String.format("%1$"+s7+"s","") + "| |";
+		
+	return card;
   }
 
   //for server
