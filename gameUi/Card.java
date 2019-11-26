@@ -25,11 +25,7 @@ public class Card{
   public void setCardString(char[] cardString) {
     this.cardString = cardString;
   }
-
-  public char[] getCardString() {
-    return cardString;
-  }
-
+  
   public void setHand(List<String> hand) {
     Card.hand = hand;
     //initial cards
