@@ -1,0 +1,46 @@
+137 Game Tutorial
+
+Server Side Tutorial:
+
+	Running the Server Side
+		-Go to the main directory of the project using the terminal and then type: javac server/*.java && java server.ServerMain <no of players from 3 to 13>
+			- e.g. javac server/*.java && java server.ServerMain 3
+	Game Load: 
+		- Once the terminal compiles the Java files, the terminal will output: "Shuffled Cards in play are:[AC, 3D, 3S, 3C, 2S, AH, 2H, 3H, 2D, AD, AS, 2C]"
+			- The specified cards are the cards available for playing
+			- The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)
+			- e.g AC would signify Ace of Hearts 
+			- the shuffled cards released depend on the number of players joining the game 
+		- Once the server side is loaded, the terminal will output that the server side is waiting for players to join the game.
+			- e.g. "Waiting for 3 more player/s on port 8818..."
+		- Each time a player joins the server, the terminal will output the user's IP address and the player's position
+			- e.g. "User from/192.168.1.10:64783 is now player#1"
+	Gameplay:
+		- Once all the players have joined the game, server side will print "Game about to start" and will direct the players to pass their cards
+		- Server side will print the initial cards of all the players and will wait until the players have passed their cards
+		- Each time a player has passed a card, the server side is notified of the card that the player passed. It will output the player's positon and the card that the player passed
+		- Once all the players have passed, the server side will show the current pool of cards that each player has.
+		- Server side will instruct all the players to pass their cards until a winner has been found. 
+
+
+Client Side Tutorial:
+	Running the Client Side
+		- Go to the main directory of the project using the terminal and then type: javac gameUi/*.java
+		- then type: javac client/*.java && java client.EchoClient <insert IP address of the server> 
+			- e.g. javac client/*.java && java client.EchoClient 192.168.1.10
+		- the terminal will then print the initial cards that the player received from server
+			- The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs) 
+			- e.g. 3D2D2C3H
+			- the player has the cards 3 of Diamonds, 2 of Diamonds, 2 of Clubs and 3 of hearts as the player's initial deck 
+
+	Gameplay
+		- Once all the players have joined the game, the server side will direct the client side players to pass their cards. 
+		- the players will be asked to enter a card. The players should only choose from their list of cards.
+		- To choose a card the player should input the card's number followed by its suit.
+			e.g.    2H3SASAH
+					- the player can only input 2H or 3S or AS or AH
+		- after choosing a card, the player is notified of the card that it passed
+			- "You, player #2 sent me 3C"
+		- after all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right. 
+		- The player wins once he gets the four matching cards 
+
