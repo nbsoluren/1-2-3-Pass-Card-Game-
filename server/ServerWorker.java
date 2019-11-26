@@ -17,6 +17,7 @@ public class ServerWorker extends Thread {
     private static List<Card> hands = new ArrayList<Card>();
     private static List<String> passedList = new ArrayList<String>(List.of("Hello", "world", "JAVA EVIL"));
     private static Integer submitted = 0;
+    private static List<Integer> winners = new ArrayList<Integer>();
 
     public ServerWorker(Socket clientSocket, List<String> initialHand1, int ID, Integer numberOfPlayers1, Integer numberOfUsers1, Integer state1, List<Card> hands1) {
         numberOfPlayers = numberOfPlayers1;
@@ -37,12 +38,23 @@ public class ServerWorker extends Thread {
         }
     }
 
+    private boolean winChecker(String card){
+      for(int i=0; i<8; i+=2){
+        if(!(card.charAt(0)==card.charAt(i))){
+          return false;
+        }
+      }
+      return true;
+    }
+
     private boolean cardChecker(String card, int id) {
         boolean suit = false;
         boolean rank = false;
 
+        System.out.println("ARE YOU AN R BEFORE R??? " + card);
         String cardString = new String(hands.get(id).getCardString());
         card = card.toUpperCase();
+        System.out.println("ARE YOU AN R??? " + card);
 
         for(int i=0; i<8; i+=2) {
             if(card.charAt(0) == cardString.charAt(i)) rank = true;
@@ -73,7 +85,6 @@ public class ServerWorker extends Thread {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         // while((line = reader.readLine()) != null){
-        while (true) {
 //            line = reader.readLine();
 //            if ("quit".equalsIgnoreCase(line)) {
 //                String msg = "Sad to see you go! :( Bye!\n";
@@ -84,12 +95,31 @@ public class ServerWorker extends Thread {
             while ((numberOfPlayers - 1) != numberOfUsers && state == 2) {
                 Thread.sleep(100);
             }
-
+            String signal;
             while(true){
-            String signal = "03\n";
-            outputStream.write(signal.getBytes());
             String playerHand = new String(hands.get(ID).cardString);
             playerHand = playerHand + "\n";
+            if(winChecker(playerHand)){
+              System.out.println("WOW WINNER CHICKEN DINNER" + ID);
+              signal = "07\n";
+              outputStream.write(signal.getBytes());
+              outputStream.write(playerHand.getBytes());
+              if(reader.readLine().equals("07")){
+                winners.add(ID);
+              }
+              if(winners.get(0)== ID){
+                String winner = "It's offical! You won!";
+                outputStream.write(winner.getBytes());
+              }else{
+                String loser = "Slow hands lost you the game. U succ!";
+                outputStream.write(loser.getBytes());
+              }
+              break;
+            }else{
+              signal = "03\n";
+            }
+            outputStream.write(signal.getBytes());
+
             outputStream.write(playerHand.getBytes());
             System.out.println("Pass your cards!" + Integer.toString(ID+1));
 
@@ -104,7 +134,9 @@ public class ServerWorker extends Thread {
                 outputStream.write(playerHand.getBytes());
                 System.out.println("Pass your cards!" + Integer.toString(ID+1));
 
-                passed = reader.readLine().substring(2, 4).toUpperCase();
+                passed = reader.readLine();
+                System.out.println("HELLO ITO SI PASSED" + passed);
+                passed = passed.substring(2, 4).toUpperCase();
                 System.out.println("Player " + (ID + 1) + " just passed " + passed);
                 checker = cardChecker(passed,ID);
             }
@@ -141,10 +173,14 @@ public class ServerWorker extends Thread {
                 Thread.sleep(100);
             }
           }
+          //printing player ranks
+          for (int i =0; i< numberOfPlayers; i++){
+            System.out.println(winners.get(i));
+          }
 
 
 
-        }
+
         // for(int i=0; i<10; i++){
         //   outputStream.write(("Time now is" + new Date() + "\n").getBytes());
         //   Thread.sleep(1000);

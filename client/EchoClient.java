@@ -36,7 +36,7 @@ public class EchoClient {
             //new Card(cardString+"");
 
             System.out.println("The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)");
-            
+
             System.out.println("-----Client Side Gameplay Tutorial-----");
             System.out.println("Once all the players have joined the game, the server side will direct the client side players to pass their cards.");
             System.out.println("The players will be asked to enter a card. The players should only choose from their list of cards.");
@@ -64,6 +64,15 @@ public class EchoClient {
                     outputStream.write(str.getBytes());
                     System.out.println(reader.readLine());
 
+                } else if (line.equals("07")){
+                  String newCards2 = new String(reader.readLine());
+                  System.out.println(newCards2);
+                  System.out.println("You won! Hurry, press Enter before anyone else does!");
+                  String str2 = userInput.readLine() + "\n";
+                  String signal2 = "07\n";
+                  outputStream.write(signal2.getBytes());
+                  System.out.println(reader.readLine());
+                  //server.close();
                 } else {
                     out.println("START\n");
                     System.out.println(line);
