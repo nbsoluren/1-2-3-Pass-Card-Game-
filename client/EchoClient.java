@@ -67,6 +67,7 @@ public class EchoClient {
                 } else if (line.equals("07")){
                   String newCards2 = new String(reader.readLine());
                   System.out.println(newCards2);
+                  new Card(newCards2 + "");
                   System.out.println("You won! Hurry, press Enter before anyone else does!");
                   String str2 = userInput.readLine() + "\n";
                   String signal2 = "07\n";
@@ -74,6 +75,9 @@ public class EchoClient {
                   System.out.println(reader.readLine());
                   //server.close();
                 } else if(line.equals("08")){
+                  String newCards3 = new String(reader.readLine());
+                  System.out.println(newCards3);
+                  new Card(newCards3 + "");
                   System.out.println("YoUr A lOzEEEEErrrrr!oUr");
                 }else {
                     out.println("START\n");

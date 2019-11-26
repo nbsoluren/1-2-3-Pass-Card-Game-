@@ -118,6 +118,7 @@ public class ServerWorker extends Thread {
             } else if(!(winners.isEmpty())){
               signal = "08\n";
               outputStream.write(signal.getBytes());
+              outputStream.write(playerHand.getBytes());
               break;
             }
             else{
@@ -176,6 +177,12 @@ public class ServerWorker extends Thread {
             }
             while(submitted!=0){
                 Thread.sleep(100);
+            }
+            if(!(winners.isEmpty())){
+              signal = "08\n";
+              outputStream.write(signal.getBytes());
+              outputStream.write(playerHand.getBytes());
+              break;
             }
           }
           //printing player ranks
