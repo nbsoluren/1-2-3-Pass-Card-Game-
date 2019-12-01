@@ -2,92 +2,87 @@ package client;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
 
 import gameUi.Card;
+import gameUi.Instructions;
 
 public class EchoClient {
     public static void main(String[] args) {
 
+        Instructions instruction = new Instructions(); //strings of instruction
         try {
-            String serverName = args[0];
-            int port = 8818;
+
+            String serverName = args[0]; //getting ip address of server
+            int port = 8818; //default port
+
+            //setting up input output streams from server
             Socket server = new Socket(serverName, port);
             InputStream inputStream = server.getInputStream();
             OutputStream outputStream = server.getOutputStream();
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
+            //buffered reader for input of user
             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.println("Client started");
-//    Socket soc = new Socket("localhost", 8818);
+            //printing successful connection
             System.out.println("Connecting to " + serverName + " on port " + port);
-
-            /* Send data to the ServerSocket */
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
 
-            PrintWriter out = new PrintWriter(outputStream, true); //true autoflush data, immediately send import junit.framework.TestCase;
-//    Thread.sleep(10000);
+            PrintWriter out = new PrintWriter(outputStream, true); //true auto flush data, immediately send import junit.framework.TestCase; I read that this was a good practice
 
+            //RECEIVING INITIAL CARDS FROM SERVER
             String cardString = reader.readLine();
-            System.out.println("Hello player! The server will not distribute your initial pool of cards");
-            System.out.println("Initial Pool of Cards from server:" + cardString + "\n");
-            //new Card(cardString+"");
-
-            System.out.println("The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)");
-
-            System.out.println("-----Client Side Gameplay Tutorial-----");
-            System.out.println("Once all the players have joined the game, the server side will direct the client side players to pass their cards.");
-            System.out.println("The players will be asked to enter a card. The players should only choose from their list of cards.");
-            System.out.println("To choose a card the player should input the card's number followed by its suit.");
-            System.out.println("After choosing a card, the player is notified of the card that it passed");
-            System.out.println("After all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right.");
-            System.out.println("The player wins once he gets the four matching cards.");
-            System.out.println();
-            System.out.println("-----GAMEPLAY-----");
-            System.out.println();
+            System.out.println(instruction.clientGreetings); //***Greet Client***
+            System.out.println(instruction.clientInstructions); //**Tell Client Instructions**
 
             //for reading from server
-            String line;
-            //for reading from terminal
-//            outputStream.write("what\n".getBytes());
+            String line; //from iostream
+            String userInputCard; //from user buffer
+            String newCards; //cards sent by server
+            String signal; //signals sent TO server
+            //while there is something being sent to client
             while ((line = reader.readLine()) != null) {
-                if (line.equals("03")) {
-                    String newCards = new String(reader.readLine());
-                    System.out.println(newCards);
-                    new Card(newCards + "");
-                    System.out.println("Player should choose a card to pass from the player's current pool of cards. To choose a card enter the card's number followed by its suit.");
-                    System.out.println("Choose a card. Enter the card's number followed by its suit: \n");
-                    String str = userInput.readLine() + "\n";
-                    str = "04" + str;
-                    outputStream.write(str.getBytes());
-                    System.out.println(reader.readLine());
 
-                } else if (line.equals("07")){
-                  String newCards2 = new String(reader.readLine());
-                  System.out.println(newCards2);
-                  new Card(newCards2 + "");
-                  System.out.println("You won! Hurry, press Enter before anyone else does!");
-                  String str2 = userInput.readLine() + "\n";
-                  String signal2 = "07\n";
-                  outputStream.write(signal2.getBytes());
-                  System.out.println(reader.readLine());
-                  //server.close();
-                } else if(line.equals("08")){
-                  String newCards3 = new String(reader.readLine());
-                  System.out.println(newCards3);
-                  new Card(newCards3 + "");
-                  System.out.println("YoUr A lOzEEEEErrrrr!oUr");
-                }else {
-                    out.println("START\n");
+                if (line.equals("03")) { //O3 Signifies to *PASS* a card
+                    newCards = new String(reader.readLine()); //get cards from server
+                    new Card(newCards + ""); //display these cards
+                    System.out.println(instruction.clientSelectionInstruction); //**Tell Client how to select a card**
+
+                    //get card from user
+                    System.out.print("Card: ");
+                    userInputCard = userInput.readLine() + "\n";
+                    userInputCard = "04" + userInputCard;
+
+                    //send card to server
+                    outputStream.write(userInputCard.getBytes());
+
+                    //read reply of server
+                    String reply = reader.readLine();
+                    if (reply.equals("09")) { //O9 means the game is over :(
+                        System.out.println(instruction.clientYouLost);
+                        break;
+                    } else {
+                        System.out.println(reply); // server tells you what card you sent
+                    }
+
+
+                } else if (line.equals("07")) { //O7 Signifies all of your cards are the same!
+                    newCards = new String(reader.readLine()); //Server also sends your cards to prove they're all the same
+                    System.out.println(newCards);
+                    new Card(newCards + ""); //display your cards
+
+                    System.out.println(instruction.clientPressEnterInstruction); //**Tell client to press enter fast to win**
+                    String str2 = userInput.readLine() + "\n"; //buffer waits for user to enter
+                    signal = "07\n";
+                    outputStream.write(signal.getBytes()); //send to server you pressed enter
+                    System.out.println(reader.readLine()); // verdict from SERVER whether you won or not
+                    System.out.println(reader.readLine()); //3 lines kasi yung verdict
+                    System.out.println(reader.readLine()); //
+                    break;
+                } else {
                     System.out.println(line);
                 }
-
-
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package server;
 
 import gameUi.Card;
+import gameUi.Instructions;
 
 import java.net.*;
 import java.util.*;
@@ -73,13 +74,14 @@ public class ServerMain {
         setNumberOfPlayers(Integer.parseInt(args[0]));
         generatePlayableCards(getNumberOfPlayers());
         List<String> distributedCards;
+        Instructions instructions = new Instructions();
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             while (getNumberOfUsers() < getNumberOfPlayers()) {
                 System.out.println("Waiting for " + (getNumberOfPlayers() - getNumberOfUsers()) + " more player/s on port " + serverSocket.getLocalPort() + "...");
                 Socket clientSocket = serverSocket.accept();
-                distributedCards = playableDeck.subList(0 + (4 * (getNumberOfUsers())), 4 * (getNumberOfUsers() + 1));
+                distributedCards = playableDeck.subList(0 + (4 * (getNumberOfUsers())), 4 * (getNumberOfUsers() + 1)); //SHUFFLING OF CARDS EY
                 ServerWorker worker = new ServerWorker(clientSocket, distributedCards, getNumberOfUsers(),getNumberOfPlayers(),numberOfUsers, state, hands);
                 worker.start();
                 addUser(clientSocket.getRemoteSocketAddress() + "", distributedCards);
@@ -87,10 +89,10 @@ public class ServerMain {
             }
 
             //Game about to START!
-            System.out.println("Game about to start..");
-            for (Map.Entry<Integer, String> entry : getUsers().entrySet()) {
-                System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-            }
+            System.out.println(instructions.gameStart); //**PRINT on server GAME START**
+//            for (Map.Entry<Integer, String> entry : getUsers().entrySet()) {
+//                System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+//            }
 
             int playerNo = 1;
             for (Card card : hands) {
