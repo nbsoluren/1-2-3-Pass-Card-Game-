@@ -58,16 +58,11 @@ public class ServerWorker extends Thread {
 
     //checks if the card exists within the players hand
     private boolean cardChecker(String card, int id) {
-        boolean suit = false;
-        boolean rank = false;
-
         String cardString = new String(hands.get(id).getCardString());
         card = card.toUpperCase();
-
+        
         for (int i = 0; i < 8; i += 2) {
-            if (card.charAt(0) == cardString.charAt(i)) rank = true;
-            if (card.charAt(1) == cardString.charAt(i + 1)) suit = true;
-            if (rank && suit) return true;
+            if (card.charAt(0) == cardString.charAt(i) && card.charAt(1) == cardString.charAt(i + 1)) return true;
         }
         return false;
     }
