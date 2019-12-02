@@ -14,7 +14,7 @@ public class ServerWorker extends Thread {
     private static Integer numberOfUsers; //how many are currently connected
 
     private static List<Card> hands = new ArrayList<Card>(); //all player cards
-    private static List<String> passedList = new ArrayList<String>(List.of("Hello", "world", "JAVA EVIL")); //cards passed by player (in order)
+    private static List<String> passedList = new ArrayList<String>(List.of("1","1","1","1","1","1","1","1","1","1","1","1","1","1")); //cards passed by player (in order)
     private static Integer submitted = 0; //how many players submitted cards in that round
     private static Integer state;
     private static List<Integer> winners = new ArrayList<Integer>(); //players who pressed enter when they had all the same rank of cards
