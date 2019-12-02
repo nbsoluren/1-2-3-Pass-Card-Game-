@@ -72,11 +72,14 @@ public class EchoClient {
 
                     //read reply of server
                     String reply = reader.readLine();
-                    if (reply.equals("09")) { //O9 means the game is over :(
-                        System.out.println(instruction.clientYouLost);
-                        break;
-                    } else {
-                        System.out.println(reply); // server tells you what card you sent
+                    try{
+                        if (reply.equals("09")) { //O9 means the game is over :(
+                            System.out.println(instruction.clientYouLost);
+                            break;
+                        } else {
+                            System.out.println(reply); // server tells you what card you sent
+                        }}catch (Exception e){
+                        e.printStackTrace();
                     }
 
 
