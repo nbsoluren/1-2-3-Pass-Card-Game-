@@ -38,10 +38,10 @@ public class Card{
   }
 
   public void setSuits(){
-    this.cardSuits.put("S","♠");
-    this.cardSuits.put("D","♦");
-    this.cardSuits.put("H","♥");
-    this.cardSuits.put("C","♣");
+    this.cardSuits.put("S","S");
+    this.cardSuits.put("D","D");
+    this.cardSuits.put("H","H");
+    this.cardSuits.put("C","C");
   }
 
   public void setRanks(){
