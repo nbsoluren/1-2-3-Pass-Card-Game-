@@ -74,7 +74,8 @@ public class EchoClient {
                     String reply = reader.readLine();
                     try{
                         if (reply.equals("09")) { //O9 means the game is over :(
-                            System.out.println(instruction.clientYouLost);
+                            String winnerID = reader.readLine();
+                            System.out.println(instruction.clientYouLost(winnerID));
                             break;
                         } else {
                             System.out.println(reply); // server tells you what card you sent

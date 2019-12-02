@@ -113,7 +113,7 @@ public class ServerWorker extends Thread {
                     outputStream.write(instruction.congratulationsWinner.getBytes()); // TELL CLIENT !! CONGRATULATIONS FOR WINNING!!!!
                 } else {
                     //CASE 2: PLAYER IS NOT THE FIRST TO COMPLETE HIS CARDS
-                    outputStream.write(instruction.sorrySlowPoke.getBytes()); // TELL CLIENT He's a SLOW POKE :(
+                    outputStream.write(instruction.sorrySlowPoke(winners.get(0)).getBytes()); // TELL CLIENT He's a SLOW POKE :(
                 }
                 break;
             } else {
@@ -144,7 +144,9 @@ public class ServerWorker extends Thread {
 
                 if (!(winners.isEmpty())) { //if someone has ALREADY WON tell client that he's a loser (eww)
                     signal = "09\n";
+                    String winnerID = Integer.toString(winners.get(0) + 1) + "\n";
                     outputStream.write(signal.getBytes());
+                    outputStream.write(winnerID.getBytes());
                     submitted ++;
                     break;
                 }else{

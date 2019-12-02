@@ -25,10 +25,13 @@ public class Instructions {
             "-----------------------------------------!HURRY!----------------------------------------\n" +
             "Your cards all match! Hurry, press Enter before anyone else does!\n" +
             "----------------------------------------------------------------------------------------\n";
-    public String clientYouLost =
+    public String clientYouLost(String ID) {
+        String msg = 
             "-----------------------------------------!LOSER!----------------------------------------\n" +
-            "Someone has already completed their cards :(\n" +
+            "Player " + ID + " has already completed their cards :(\n" +
             "----------------------------------------------------------------------------------------\n";
+        return msg;
+    }
     public String serverSomeoneCompleted(int ID){
         String msg =
             "-------------------------------------!COMPLETE ALERT!-----------------------------------\n" +
@@ -54,10 +57,13 @@ public class Instructions {
             "------------------------------!WINNER WINNER CHICKEN DINNER!----------------------------\n" +
             "CONGRATULATIONS! YOU HAD FAST FINGERS! YOU WON!!\n" +
             "----------------------------------------------------------------------------------------\n";
-    public String sorrySlowPoke =
+    public String sorrySlowPoke(int ID){
+        String msg =
             "----------------------------------------!SLOWPOKE!--------------------------------------\n" +
-            "Your slow fingers cost you the game! Sorry, you lost!\n" +
+            "Your slow fingers cost you the game! Sorry, you lost! Player " + Integer.toString(ID+1) + " has won the game.\n" +
             "----------------------------------------------------------------------------------------\n";
+        return msg;
+    }
     public String inputLengthError =
             "-----------------------------------!!!!!!ALERT!!!!!!------------------------------------\n" +
             "Invalid card length. Try again.\n" +
@@ -66,7 +72,7 @@ public class Instructions {
     public String wrongString(int ID, String string){
         String msg =
             "-----------------------------------!!!!!!ALERT!!!!!!------------------------------------\n" +
-            "You player " + Integer.toString(ID) + " submitted the wrong string! You don't have "+ string + "\n" +
+            "You player " + Integer.toString(ID+1) + " submitted the wrong string! You don't have "+ string + "\n" +
             "----------------------------------------------------------------------------------------\n";
         return msg;
     }
