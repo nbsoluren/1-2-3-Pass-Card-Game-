@@ -39,7 +39,7 @@ public class Instructions {
     public String serverSomeoneWon(int ID){
         String msg =
             "------------------------------------!WE HAVE A WINNER!----------------------------------\n" +
-            "Player " + Integer.toString(ID+1) + " matched all his/her cards first!!\n" +
+            "Player " + Integer.toString(ID+1) + " matched all his/her cards and has the fastest fingers\n" +
             "----------------------------------------------------------------------------------------\n";
         return msg;
     }
