@@ -67,9 +67,7 @@ public class ServerWorker extends Thread {
         for (int i = 0; i < 8; i += 2) {
             if (card.charAt(0) == cardString.charAt(i)) rank = true;
             if (card.charAt(1) == cardString.charAt(i + 1)) suit = true;
-            if (rank && suit) {
-                return true;
-            }
+            if (rank && suit) return true;
         }
         return false;
     }

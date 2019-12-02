@@ -7,6 +7,12 @@ import gameUi.Card;
 import gameUi.Instructions;
 
 public class EchoClient {
+
+    private static boolean strChecker(String input) {
+        if(input.length()!=5) return false;
+        else return true;
+    }
+
     public static void main(String[] args) {
 
         Instructions instruction = new Instructions(); //strings of instruction
@@ -52,6 +58,14 @@ public class EchoClient {
                     System.out.print("Card: ");
                     userInputCard = userInput.readLine() + "\n";
                     userInputCard = "04" + userInputCard;
+
+                    //check if user input length is valid
+                    while(!strChecker(userInputCard)){
+                        System.out.println(instruction.inputLengthError);
+                        System.out.print("Card: ");
+                        userInputCard = userInput.readLine() + "\n";
+                        userInputCard = "04" + userInputCard;
+                    }
 
                     //send card to server
                     outputStream.write(userInputCard.getBytes());
