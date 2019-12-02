@@ -20,8 +20,8 @@ Server Side Tutorial:
 		- Server side will print the initial cards of all the players and will wait until the players have passed their cards
 		- Each time a player has passed a card, the server side is notified of the card that the player passed. It will output the player's positon and the card that the player passed
 		- Once all the players have passed, the server side will show the current pool of cards that each player has.
-		- Server side will instruct all the players to pass their cards until a winner has been found. 
-
+		- Server side will instruct all the players to pass their cards until a player has matched all his/her cards. 
+		- Once a player/players matched all their cards, server side will instruct players to press Enter. The first player to press Enter wins the game.
 
 Client Side Tutorial:
 	Running the Client Side
@@ -42,5 +42,6 @@ Client Side Tutorial:
 		- after choosing a card, the player is notified of the card that it passed
 			- "You, player #2 sent me 3C"
 		- after all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right. 
-		- The player wins once he gets the four matching cards 
-
+		- after all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right. 
+		- Once a player has matched all his/her cards, the players will be prompted to press "Enter"
+		- The first player to press "Enter" wins.
