@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class Card{
-  private static String[] cardRanks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+  private static String[] cardRanks = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
   private static HashMap<String, String> cardSuits = new HashMap<String, String>();
 	private static HashMap<String, String> cardRank = new HashMap<String, String>();
   private static List<String> hand = new ArrayList<String> ();
@@ -54,7 +54,7 @@ public class Card{
 		this.cardRank.put("7","7");
 		this.cardRank.put("8","8");
 		this.cardRank.put("9","9");
-		this.cardRank.put("T","10");
+		this.cardRank.put("T","T");
 		this.cardRank.put("J","J");
 		this.cardRank.put("Q","Q");
 		this.cardRank.put("K","K");

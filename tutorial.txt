@@ -8,7 +8,7 @@ Server Side Tutorial:
 	Game Load: 
 		- Once the terminal compiles the Java files, the terminal will output: "Shuffled Cards in play are:[AC, 3D, 3S, 3C, 2S, AH, 2H, 3H, 2D, AD, AS, 2C]"
 			- The specified cards are the cards available for playing
-			- The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)
+			- The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, T, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)
 			- e.g AC would signify Ace of Hearts 
 			- the shuffled cards released depend on the number of players joining the game 
 		- Once the server side is loaded, the terminal will output that the server side is waiting for players to join the game.

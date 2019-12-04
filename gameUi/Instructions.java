@@ -5,14 +5,14 @@ public class Instructions {
     //Client instructions
     public String clientGreetings =
             "-----------------------------------***-GREETINGS!-***-----------------------------------\n" +
-            "Hello player! The server will not distribute your initial pool of cards once all players have connected";
+            "Hello player! The server will now distribute your initial pool of cards once all players have connected";
     public String clientInstructions =
             "-------------------------***-Client Side Game play Tutorial-***-------------------------\n" +
-            "The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)\n\n" +
+            "The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, T, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs).\n\n" +
             "Once all the players have joined the game, the server side will direct the client side players to pass their cards.\n" +
             "The players will be asked to enter a card. The players should only choose from their list of cards.\n" +
             "To choose a card the player should input the card's number followed by its suit.\n" +
-            "After choosing a card, the player is notified of the card that it passed\n" +
+            "After choosing a card, the player is notified of the card that it passed.\n" +
             "After all the players have passed, the player is notified of its current pool of cards. The player will have its card passed to the player on the right.\n" +
             "The player wins once he gets the four matching cards.\n\n" +
             "-----------------------------------***-GAME START-***-----------------------------------\n" +

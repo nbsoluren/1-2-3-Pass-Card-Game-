@@ -38,7 +38,7 @@ public class ServerMain {
     }
 
     public static void generatePlayableCards(Integer numberOfPlayers) {
-        String[] cardRanks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        String[] cardRanks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"};
         String[] cardSuits = {"D", "H", "S", "C"};
         String tempCard;
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -53,14 +53,14 @@ public class ServerMain {
 
         System.out.println("Shuffled Cards in play are:" + Arrays.toString(playableDeck.toArray()));
         System.out.println();
-        System.out.println("The specified cards above are the cards available for playing");
+        System.out.println("The specified cards above are the cards available for playing.");
         System.out.println();
-        System.out.println("The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs)");
+        System.out.println("The naming convention of the cards is first letter signifies the number (Ace, 2, 3, 4, 5, 6, 7, 8, 9, T, Jack, Queen, King) and the second letter signifies the suit (Spades, Hearts, Diamonds, Clubs).");
         System.out.println();
         System.out.println("-----Server Side Gameplay Tutorial-----");
-        System.out.println("Once all the players have joined the game, server side will print 'Game about to start' and will direct the players to pass their cards");
-        System.out.println("Server side will print the initial cards of all the players and will wait until the players have passed their cards");
-        System.out.println("Each time a player has passed a card, the server side is notified of the card that the player passed. It will output the player's positon and the card that the player passed");
+        System.out.println("Once all the players have joined the game, server side will print 'Game about to start' and will direct the players to pass their cards.");
+        System.out.println("Server side will print the initial cards of all the players and will wait until the players have passed their cards.");
+        System.out.println("Each time a player has passed a card, the server side is notified of the card that the player passed. It will output the player's positon and the card that the player passed.");
         System.out.println("Once all the players have passed, the server side will show the current pool of cards that each player has.");
         System.out.println("Server side will instruct all the players to pass their cards until a winner has been found.");
         System.out.println();        
