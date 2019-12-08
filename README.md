@@ -1,6 +1,8 @@
 # 1-2-3-Pass-Card-Game-
 Project fullfilment for CMSC 137
 
+![Sample Image](sample.png)
+
 Server Side Tutorial:
 
 	Running the Server Side
